@@ -1,4 +1,11 @@
 sudo: required
 
+language: ruby
+
 services:
   - docker
+
+before_install:
+  - docker build -t hunterlong/auto-phusion-rails .
+  - docker run -d -e 'GIT_PERSONAL_TOKEN=$GIT_PERSONAL_TOKEN' -e 'GIT_EMAIL=$GIT_EMAIL' -e 'GIT_USERNAME=$GIT_USERNAME' -e 'GIT_BRANCH=$GIT_BRANCH' -e 'GIT_REPO=$GIT_REPO' hunterlong/auto-phusion-rails
+  - docker ps -a
