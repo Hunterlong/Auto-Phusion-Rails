@@ -15,6 +15,12 @@ ENV PASSENGER_APP_ENV development
 
 CMD ["/sbin/my_init"]
 
+
+ADD scripts/pull /usr/local/bin/pull
+ADD scripts/start.sh /root/start.sh
+RUN chmod 777 /usr/local/bin/pull
+RUN chmod 777 /root/start.sh
+
 RUN rm /etc/nginx/sites-enabled/default
 
 ADD conf/nginx/rails_env.conf /etc/nginx/main.d/rails_env.conf
@@ -27,4 +33,4 @@ WORKDIR /var/www/html
 # Clean up APT when done.
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-ENTRYPOINT ["/scripts/start.sh"]
+ENTRYPOINT ["/root/start.sh"]
