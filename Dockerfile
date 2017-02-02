@@ -30,7 +30,6 @@ RUN chmod 777 /root/start.sh
 
 RUN rm /etc/nginx/sites-enabled/default
 
-ADD conf/nginx/nginx.conf /etc/nginx/main.d/nginx.conf
 ADD conf/nginx/rails_env.conf /etc/nginx/main.d/rails_env.conf
 ADD conf/nginx/app.conf /etc/nginx/sites-enabled/webapp.conf
 
