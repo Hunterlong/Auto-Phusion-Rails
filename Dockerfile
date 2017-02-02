@@ -4,9 +4,12 @@ MAINTAINER Hunter Long <info@socialeck.com>
 #
 # === Phusion Nginx Web Server running Ruby on Rails
 #
+# docker run -d -p 80:80 -e 'GIT_REPO=railsapps/learn-rails' hunterlong/auto-phusion-rails
+#
 #   - Go Production mode with  -e 'RAILS_ENV=production'
 #   - You can mount installed gems '-v /my/local/gems:/usr/local/gems' for fast startup
 #   - Automatically pulls from Github and runs app.
+#
 
 # Standard ENVs
 ENV HOME /root

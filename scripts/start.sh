@@ -22,15 +22,15 @@ if [ ! -d "/var/www/html/.git" ]; then
     rm -Rf /var/www/html/*
     if [ ! -z "$GIT_BRANCH" ]; then
       if [ -z "$GIT_USERNAME" ] && [ -z "$GIT_PERSONAL_TOKEN" ]; then
-        git clone -b $GIT_BRANCH https://$GIT_REPO /var/www/html/ || exit 1
+        git clone -b $GIT_BRANCH https://github.com/$GIT_REPO /var/www/html/ || exit 1
       else
-        git clone -b ${GIT_BRANCH} https://${GIT_USERNAME}:${GIT_PERSONAL_TOKEN}@${GIT_REPO} /var/www/html || exit 1
+        git clone -b ${GIT_BRANCH} https://github.com/${GIT_USERNAME}:${GIT_PERSONAL_TOKEN}@${GIT_REPO} /var/www/html || exit 1
       fi
     else
       if [ -z "$GIT_USERNAME" ] && [ -z "$GIT_PERSONAL_TOKEN" ]; then
-        git clone https://$GIT_REPO /var/www/html/  || exit 1
+        git clone https://github.com/$GIT_REPO /var/www/html/  || exit 1
       else
-        git clone https://${GIT_USERNAME}:${GIT_PERSONAL_TOKEN}@${GIT_REPO} /var/www/html || exit 1
+        git clone https://github.com/${GIT_USERNAME}:${GIT_PERSONAL_TOKEN}@${GIT_REPO} /var/www/html || exit 1
       fi
     fi
   fi
