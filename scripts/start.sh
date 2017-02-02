@@ -36,6 +36,10 @@ if [ ! -d "/var/www/html/.git" ]; then
   fi
 fi
 
+if [ -f /var/www/html/config/nginx.conf ]; then
+  cp -f /var/www/html/config/nginx.conf /etc/nginx/sites-enabled/webapp.conf
+fi
+
 chown -Rf app:app /var/www/html
 
 cd /var/www/html
