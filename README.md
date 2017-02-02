@@ -37,13 +37,6 @@ docker run -d -p 80:80 -v /my/local/gems:/usr/local/bundle \
  -e 'GIT_REPO=RailsApps/learn-rails' hunterlong/auto-phusion-rails
 ```
 
-### Speed Up Gem Installations
-Mount your local gem installation folder with the container's.
-```bash
-docker run -d -p 80:80 -v /my/local/gems:/usr/local/bundle:rw \
- -e 'GIT_REPO=RailsApps/learn-rails' hunterlong/auto-phusion-rails
-```
-
 ### Custom NginX Environment Variables In App
 If you need environment variables to be passed down all the way to the Rails application, you can mount a nginx ENV config file using '-v'.  You can also host this file on your github repo at: 'config/rails_env.conf'. The docker image will automatically pull and use this file in nginx. 
 ###### Mounting
