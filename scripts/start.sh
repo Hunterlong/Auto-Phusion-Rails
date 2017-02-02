@@ -5,6 +5,8 @@
 mkdir -p -m 0700 /root/.ssh
 echo -e "Host *\n\tStrictHostKeyChecking no\n" >> /root/.ssh/config
 
+git config --global --unset https.proxy
+
 # Setup git variables
 if [ ! -z "$GIT_EMAIL" ]; then
   git config --global user.email "$GIT_EMAIL"
