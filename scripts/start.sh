@@ -5,12 +5,6 @@
 mkdir -p -m 0700 /root/.ssh
 echo -e "Host *\n\tStrictHostKeyChecking no\n" >> /root/.ssh/config
 
-if [ ! -z "$SSH_KEY" ]; then
-  echo $SSH_KEY > /root/.ssh/id_rsa.base64
-  base64 -d /root/.ssh/id_rsa.base64 > /root/.ssh/id_rsa
-  chmod 600 /root/.ssh/id_rsa
-fi
-
 # Setup git variables
 if [ ! -z "$GIT_EMAIL" ]; then
   git config --global user.email "$GIT_EMAIL"
@@ -28,22 +22,32 @@ if [ ! -d "/var/www/html/.git" ]; then
     rm -Rf /var/www/html/*
     if [ ! -z "$GIT_BRANCH" ]; then
       if [ -z "$GIT_USERNAME" ] && [ -z "$GIT_PERSONAL_TOKEN" ]; then
-        git clone -b $GIT_BRANCH $GIT_REPO /var/www/html/ || exit 1
+        git clone -b $GIT_BRANCH https://$GIT_REPO /var/www/html/ || exit 1
       else
         git clone -b ${GIT_BRANCH} https://${GIT_USERNAME}:${GIT_PERSONAL_TOKEN}@${GIT_REPO} /var/www/html || exit 1
       fi
     else
       if [ -z "$GIT_USERNAME" ] && [ -z "$GIT_PERSONAL_TOKEN" ]; then
-        git clone $GIT_REPO /var/www/html/  || exit 1
+        git clone https://$GIT_REPO /var/www/html/  || exit 1
       else
         git clone https://${GIT_USERNAME}:${GIT_PERSONAL_TOKEN}@${GIT_REPO} /var/www/html || exit 1
       fi
     fi
-    chown -Rf app.app /var/www/html
   fi
 fi
 
-cd /var/www/html
-bundle install
+chown -Rf app:app /var/www/html
 
-rm -f /etc/service/nginx/down
+cd /var/www/html
+
+bundle config --global path "$GEM_HOME"
+bundle config --global bin "$GEM_HOME/bin"
+bundle install --path "$GEM_HOME"
+
+rake db:migrate RAILS_ENV=$RAILS_ENV
+
+chown -Rf app:app /var/www/html
+
+/sbin/my_init
+
+tail -f /var/log/nginx/access.log
