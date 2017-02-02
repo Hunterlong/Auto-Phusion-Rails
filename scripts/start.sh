@@ -40,6 +40,10 @@ if [ -f /var/www/html/config/nginx.conf ]; then
   cp -f /var/www/html/config/nginx.conf /etc/nginx/sites-enabled/webapp.conf
 fi
 
+if [ -f /var/www/html/config/rails_env.conf ]; then
+  cp -f /var/www/html/config/rails_env.conf /etc/nginx/main.d/rails_env.conf
+fi
+
 chown -Rf app:app /var/www/html
 
 cd /var/www/html
