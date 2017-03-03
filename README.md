@@ -1,4 +1,4 @@
-# Auto-Phusion-Rails [![Build Status](https://travis-ci.org/Hunterlong/Auto-Phusion-Rails.svg?branch=master)](https://travis-ci.org/Hunterlong/Auto-Phusion-Rails)
+# Auto-Phusion-Rails [![Build Status](https://travis-ci.org/hunterlong/Auto-Phusion-Rails.svg?branch=master)](https://travis-ci.org/hunterlong/Auto-Phusion-Rails)
 Automatically pull your Ruby on Rails source and run it on Nginx and Passenger.
 
 
